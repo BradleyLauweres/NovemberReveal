@@ -9,7 +9,7 @@ const STOPS_DATA = [
     x: 20, 
     y: 85, 
     label: "December", 
-    image: "/Fotos/December.JPG",
+    image: "Fotos/December.JPG",
     description: "Een magische afsluiting van het jaar."
   },
   { 
@@ -17,7 +17,7 @@ const STOPS_DATA = [
     x: 75, 
     y: 60, 
     label: "Februari", 
-    image: "/Fotos/Februari.HEIC",
+    image: "Fotos/Februari.HEIC",
     description: "Samen herinneringen maken."
   },
   { 
@@ -25,7 +25,7 @@ const STOPS_DATA = [
     x: 25, 
     y: 35, 
     label: "Maart", 
-    image: "/Fotos/Maart.jpg",
+    image: "Fotos/Maart.jpg",
     description: "De lente in onze ogen."
   },
   { 
@@ -33,7 +33,7 @@ const STOPS_DATA = [
     x: 70, 
     y: 20, 
     label: "April", 
-    image: "/Fotos/April.JPG",
+    image: "Fotos/April.JPG",
     description: "Nog meer mooie momenten."
   },
   { 
@@ -50,7 +50,7 @@ function App() {
   const [started, setStarted] = useState(false);
   const [currentStop, setCurrentStop] = useState(-1);
   const [showReveal, setShowReveal] = useState(false);
-  const [stops, setStops] = useState(STOPS_DATA);
+  const [stops, setStops] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const airplaneRef = useRef(null);
 
@@ -58,10 +58,13 @@ function App() {
     const processImages = async () => {
       setIsLoading(true);
       const updatedStops = await Promise.all(STOPS_DATA.map(async (stop) => {
+        const isExternal = stop.image.startsWith('http');
+        const imageUrl = isExternal ? stop.image : `${import.meta.env.BASE_URL}${stop.image}`;
+
         if (stop.image.toLowerCase().endsWith('.heic')) {
           try {
-            const res = await fetch(stop.image);
-            if (!res.ok) throw new Error("Could not fetch image");
+            const res = await fetch(imageUrl);
+            if (!res.ok) throw new Error(`Could not fetch image: ${res.status}`);
             const blob = await res.blob();
             const convertedBlob = await heic2any({
               blob,
@@ -72,10 +75,10 @@ function App() {
             return { ...stop, image: url };
           } catch (e) {
             console.error("HEIC conversion failed for", stop.label, e);
-            return stop;
+            return { ...stop, image: imageUrl };
           }
         }
-        return stop;
+        return { ...stop, image: imageUrl };
       }));
       setStops(updatedStops);
       setIsLoading(false);

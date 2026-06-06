@@ -61,19 +61,38 @@ body {
 .section {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    padding: 150px 20px; /* Verhoogd voor meer ruimte tussen de maanden */
+    max-width: 600px;
+    padding: 80px 20px;
     z-index: 2;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.timeline-item.left { align-items: flex-start; padding-left: 10%; }
+.timeline-item.right { align-items: flex-end; padding-right: 10%; }
+
+/* Split items (Side by side with overlap) */
+.timeline-item.split {
+    align-items: stretch;
+    padding: 40px 20px;
+}
+
+.timeline-item.split .polaroid:nth-child(1) {
+    align-self: flex-start;
+}
+
+.timeline-item.split .polaroid:nth-child(2) {
+    align-self: flex-end;
+    margin-top: -120px; /* Verticale overlap om ruimte te besparen op mobiel */
+    z-index: 3;
 }
 
 /* Polaroid Styling */
 .polaroid {
     background: white;
-    padding: 15px 15px 40px 15px;
+    padding: 12px 12px 35px 12px;
     box-shadow: var(--polaroid-shadow);
-    max-width: 85%;
+    width: 250px; /* Iets smaller voor betere fit op mobiel */
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
     opacity: 0;
     transform: translateY(30px) rotate(var(--rot, 0deg));
@@ -85,17 +104,19 @@ body {
     content: '';
     position: absolute;
     top: 50%;
-    width: 30px;
+    width: 25px;
     height: 1px;
     border-top: 2px dotted var(--secondary-color);
     z-index: -1;
 }
 
-.timeline-item.left .polaroid::after {
+.timeline-item.left .polaroid::after,
+.timeline-item.split .polaroid:nth-child(1)::after {
     left: 100%;
 }
 
-.timeline-item.right .polaroid::after {
+.timeline-item.right .polaroid::after,
+.timeline-item.split .polaroid:nth-child(2)::after {
     right: 100%;
 }
 
@@ -107,9 +128,7 @@ body {
 /* Random rotations for polaroids */
 .timeline-item:nth-child(odd) .polaroid { --rot: -3deg; }
 .timeline-item:nth-child(even) .polaroid { --rot: 3deg; }
-
-.timeline-item.left { justify-content: flex-start; padding-left: 10%; }
-.timeline-item.right { justify-content: flex-end; padding-right: 10%; }
+.timeline-item.split .polaroid:nth-child(2) { --rot: 5deg; }
 
 .image-placeholder {
     width: 100%;
@@ -142,13 +161,13 @@ body {
 
 .caption h3 {
     font-family: var(--font-romantic);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--primary-color);
     margin-bottom: 5px;
 }
 
 .caption p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-style: italic;
     color: #666;
 }
@@ -179,7 +198,7 @@ body {
 .ticket-container {
     background: white;
     width: 95%;
-    max-width: 450px; /* Breder gemaakt voor een langwerpiger effect */
+    max-width: 450px;
     margin: 30px auto;
     border-radius: 15px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
@@ -198,7 +217,7 @@ body {
 }
 
 .ticket-body {
-    padding: 30px 40px; /* Meer horizontale padding voor langwerpig gevoel */
+    padding: 30px 40px;
     background-image: radial-gradient(circle at 0 50%, transparent 12px, white 12px), 
                       radial-gradient(circle at 100% 50%, transparent 12px, white 12px);
 }
@@ -327,4 +346,5 @@ body {
 @media (max-width: 400px) {
     .destination-title { font-size: 3rem; }
     .timeline-item.left, .timeline-item.right { padding: 40px 10px; }
+    .polaroid { width: 220px; }
 }

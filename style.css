@@ -87,12 +87,18 @@ body {
     z-index: 3;
 }
 
+.timeline-item.split .polaroid:nth-child(3) {
+    align-self: flex-start;
+    margin-top: -120px;
+    z-index: 4;
+}
+
 /* Polaroid Styling */
 .polaroid {
     background: white;
     padding: 12px 12px 35px 12px;
     box-shadow: var(--polaroid-shadow);
-    width: 250px; /* Iets smaller voor betere fit op mobiel */
+    width: 250px;
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease;
     opacity: 0;
     transform: translateY(30px) rotate(var(--rot, 0deg));
@@ -111,7 +117,8 @@ body {
 }
 
 .timeline-item.left .polaroid::after,
-.timeline-item.split .polaroid:nth-child(1)::after {
+.timeline-item.split .polaroid:nth-child(1)::after,
+.timeline-item.split .polaroid:nth-child(3)::after {
     left: 100%;
 }
 
@@ -185,7 +192,7 @@ body {
     color: #888;
 }
 
-/* Reveal Section & Ticket */
+/* Realistic & Elongated Boarding Pass */
 #reveal-section {
     min-height: 100vh;
     display: flex;
@@ -197,48 +204,80 @@ body {
 
 .ticket-container {
     background: white;
-    width: 95%;
-    max-width: 450px;
+    width: 100%;
+    max-width: 650px; /* Langwerpig */
     margin: 30px auto;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
     overflow: hidden;
     position: relative;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
 }
 
 .ticket-header {
     background: var(--primary-color);
     color: white;
-    padding: 12px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    font-size: 0.85rem;
+    padding: 12px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.airline-name {
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.boarding-pass-title {
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    opacity: 0.9;
 }
 
 .ticket-body {
-    padding: 30px 40px;
-    background-image: radial-gradient(circle at 0 50%, transparent 12px, white 12px), 
-                      radial-gradient(circle at 100% 50%, transparent 12px, white 12px);
-}
-
-.ticket-info {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    background: #fff;
+    min-height: 200px;
+}
+
+.ticket-main {
+    flex: 3;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     text-align: left;
+    border-right: 1px dashed #ccc;
+    position: relative;
 }
 
-.info-group label {
-    display: block;
-    font-size: 0.6rem;
+.ticket-row {
+    display: flex;
+    gap: 40px;
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-main .info-group label {
+    font-size: 0.55rem;
     color: #aaa;
-    margin-bottom: 3px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
 }
 
-.info-group span {
-    font-weight: bold;
-    font-size: 0.9rem;
+.ticket-main .info-group span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .destination-masked {
@@ -246,8 +285,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 2px dashed #eee;
+    border-top: 1px dashed #eee;
+    margin-top: 10px;
     padding-top: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.mask-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 #reveal-btn {
@@ -255,36 +303,109 @@ body {
     color: white;
     border: none;
     padding: 12px 25px;
-    border-radius: 25px;
+    border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    z-index: 100;
+    position: relative;
+    pointer-events: auto;
+    transition: transform 0.2s, background 0.2s;
 }
 
-#reveal-btn:active {
-    transform: scale(0.95);
+#reveal-btn:hover {
+    background: #ff3355;
+    transform: scale(1.05);
 }
 
-.hidden {
-    display: none;
+.destination-info {
+    text-align: center;
+    width: 100%;
+}
+
+.airport-codes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.airport-codes span {
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .destination-title {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 900;
     color: var(--primary-color);
-    margin: 10px 0;
-    text-shadow: 0 0 20px rgba(255, 77, 109, 0.3);
-    animation: pulse 2s infinite alternate;
+    margin: 0;
+    letter-spacing: 2px;
 }
 
-.ticket-footer {
-    border-top: 1px solid #eee;
-    padding: 10px;
-    font-size: 0.6rem;
+.ticket-stub {
+    flex: 1;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fafafa;
+    text-align: left;
+}
+
+.stub-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stub-info label {
+    font-size: 0.5rem;
     color: #bbb;
+    font-weight: bold;
     letter-spacing: 1px;
+}
+
+.stub-info span {
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    color: #444;
+}
+
+.barcode {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+.barcode span {
+    background: #333;
+    width: 100%;
+    height: 3px;
+    display: block;
+}
+
+.barcode span:nth-child(3n) { height: 5px; }
+.barcode span:nth-child(4n) { height: 2px; }
+
+.ticket-footer {
+    background: #f8f8f8;
+    border-top: 1px solid #eee;
+    padding: 10px 25px;
+    font-size: 0.6rem;
+    color: #ccc;
+    letter-spacing: 3px;
+    text-align: left;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .reveal-footer {
@@ -292,17 +413,6 @@ body {
     font-style: italic;
     color: var(--text-color);
     margin-top: 20px;
-    animation: fadeIn 1s forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    from { transform: scale(1); filter: brightness(1); }
-    to { transform: scale(1.05); filter: brightness(1.2); }
 }
 
 /* Start Hint */
@@ -343,8 +453,23 @@ body {
 }
 
 /* Responsive adjustments */
+@media (max-width: 650px) {
+    .ticket-body { flex-direction: column; }
+    .ticket-main { border-right: none; border-bottom: 1px dashed #ccc; }
+    .ticket-stub { flex-direction: row; padding: 20px; }
+    .stub-info { flex-direction: row; gap: 30px; }
+    .barcode { display: none; }
+    .ticket-container { max-width: 450px; }
+}
+
 @media (max-width: 400px) {
-    .destination-title { font-size: 3rem; }
-    .timeline-item.left, .timeline-item.right { padding: 40px 10px; }
+    .ticket-row { gap: 20px; }
+    .destination-title { font-size: 2.2rem; }
+    .airport-codes span { font-size: 1.4rem; }
     .polaroid { width: 220px; }
+    .timeline-item.split { padding: 20px 10px; }
+    .timeline-item.split .polaroid:nth-child(2),
+    .timeline-item.split .polaroid:nth-child(3) { 
+        margin-top: -40px; /* Sterk verminderde overlap zodat tekst leesbaar blijft */
+    }
 }

@@ -27,30 +27,29 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = timelineItems.length - 1; i >= 0; i--) {
             const item = timelineItems[i];
             const isSplit = item.classList.contains('split');
-            const polaroid = item.querySelector('.polaroid');
-            if (!polaroid) continue;
-            
-            const pRect = polaroid.getBoundingClientRect();
+            const iRect = item.getBoundingClientRect();
             let x;
             
             if (isSplit) {
-                // Voor split items vliegen we door het midden
                 x = width / 2;
             } else {
+                const polaroid = item.querySelector('.polaroid');
+                if (!polaroid) continue;
+                const pRect = polaroid.getBoundingClientRect();
                 const isLeft = item.classList.contains('left');
                 x = isLeft ? pRect.right + 25 : pRect.left - 25;
             }
 
             points.push({
                 x: x,
-                y: pRect.top + pRect.height / 2 + scrollOffset
+                y: iRect.top + iRect.height / 2 + scrollOffset
             });
         }
 
         const revealRect = document.getElementById('reveal-section').getBoundingClientRect();
         points.push({
             x: width / 2,
-            y: revealRect.top + revealRect.height / 4 + scrollOffset
+            y: revealRect.top + revealRect.height / 3 + scrollOffset
         });
 
         let d = `M ${points[0].x} ${points[0].y}`;
@@ -92,17 +91,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // REVEAL LOGIC
     const revealBtn = document.getElementById('reveal-btn');
     const finalDest = document.getElementById('final-destination');
     const revealFooter = document.getElementById('reveal-footer');
-    const maskContent = document.querySelector('.mask-content');
+    const maskContent = document.getElementById('mask-content-id');
 
-    revealBtn.addEventListener('click', () => {
-        maskContent.classList.add('hidden');
-        finalDest.classList.remove('hidden');
-        revealFooter.classList.remove('hidden');
-        startConfetti();
-    });
+    if (revealBtn && finalDest) {
+        revealBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (maskContent) maskContent.classList.add('hidden');
+            finalDest.classList.remove('hidden');
+            if (revealFooter) revealFooter.classList.remove('hidden');
+            startConfetti();
+        });
+    }
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -123,13 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confettiActive) return;
         confettiActive = true;
         resizeCanvas();
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 150; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height - canvas.height,
                 size: Math.random() * 8 + 4,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                speed: Math.random() * 3 + 2,
+                speed: Math.random() * 3 + 3,
                 angle: Math.random() * 6.28,
                 rotation: Math.random() * 0.2 - 0.1
             });
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
             p.y += p.speed;
-            p.x += Math.sin(p.angle) * 1;
+            p.x += Math.sin(p.angle) * 2;
             p.angle += p.rotation;
             ctx.fillStyle = p.color;
             ctx.fillRect(p.x, p.y, p.size, p.size);

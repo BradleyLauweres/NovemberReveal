@@ -29,31 +29,63 @@
         -->
         <section id="reveal-section" class="section">
             <div class="reveal-content">
-                <p class="reveal-text-small">Na al deze mooie herinneringen...</p>
-                <p class="reveal-text-small">Is het tijd voor ons volgende avontuur...</p>
+                <p class="reveal-text-small">Na al het wachten en gepest worden is het dan zo ver...</p>
                 
                 <!-- Interactief Ticket -->
                 <div id="flight-ticket" class="ticket-container">
-                    <div class="ticket-header">BOARDING PASS</div>
+                    <div class="ticket-header">
+                        <div class="airline-name">INDONESIA AIRWAYS</div>
+                        <div class="boarding-pass-title">BOARDING PASS</div>
+                    </div>
                     <div class="ticket-body">
-                        <div class="ticket-info">
-                            <div class="info-group">
-                                <label>PASSAGIER</label>
-                                <span>Jij & Ik ❤️</span>
+                        <div class="ticket-main">
+                            <div class="ticket-row">
+                                <div class="info-group">
+                                    <label>PASSAGIER</label>
+                                    <span>Jij & Ik ❤️</span>
+                                </div>
+                                <div class="info-group">
+                                    <label>VLUCHT</label>
+                                    <span>GA 29.12</span>
+                                </div>
                             </div>
-                            <div class="info-group">
-                                <label>DATUM</label>
-                                <span>09/11 tot 18/11 ✈️</span>
+                            <div class="ticket-row">
+                                <div class="info-group">
+                                    <label>DATUM</label>
+                                    <span>07/11 tot 17/11 ✈️</span>
+                                </div>
+                                <div class="info-group">
+                                    <label>STOEL</label>
+                                    <span>01A & 01B</span>
+                                </div>
+                            </div>
+                            <div class="destination-masked">
+                                <div id="mask-content-id" class="mask-content">
+                                    <button id="reveal-btn">ONTHUL BESTEMMING</button>
+                                </div>
+                                <div id="final-destination" class="destination-info hidden">
+                                    <div class="airport-codes">
+                                        <span>BRU</span>
+                                        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M21,16L21,14L13,9V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V9L2,14V16L10,13.5V19L8,20.5V22L11.5,21L15,22V20.5L13,19V13.5L21,16Z" /></svg>
+                                        <span>DPS</span>
+                                    </div>
+                                    <h1 class="destination-title">WE GOING BALI SNOETER</h1>
+                                </div>
                             </div>
                         </div>
-                        <div class="destination-masked">
-                            <div class="mask-content">
-                                <button id="reveal-btn">ONTHUL BESTEMMING</button>
+                        <div class="ticket-stub">
+                            <div class="stub-info">
+                                <label>GATE</label>
+                                <span>B24</span>
+                                <label>BOARDING</label>
+                                <span>09:30</span>
                             </div>
-                            <h1 id="final-destination" class="destination-title hidden">🌴 BALI 🌴</h1>
+                            <div class="barcode">
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="ticket-footer">PREMIUM CLASS • ONE WAY TO PARADISE</div>
+                    <div class="ticket-footer"></div>
                 </div>
 
                 <p id="reveal-footer" class="reveal-footer hidden">Ik kan niet wachten om samen met jou naar Bali te gaan ❤️</p>
@@ -67,72 +99,6 @@
             - Verander de p voor je eigen romantische tekstje.
             - Vervang de <img> tag (nu in commentaar) door je eigen foto pad.
         -->
-        
-        <section class="section timeline-item right" data-month="November">
-            <div class="polaroid">
-                <div class="image-placeholder">
-                    <span>11</span>
-                    <!-- VERVANG DE LIJN HIERONDER DOOR JE EIGEN FOTO: -->
-                    <!-- <img src="fotos/november.jpg" alt="November"> -->
-                </div>
-                <div class="caption">
-                    <h3>November 🍁</h3>
-                    <p>Nog één halte voor ons volgende avontuur...</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section timeline-item left" data-month="Oktober">
-            <div class="polaroid">
-                <div class="image-placeholder">
-                    <span>10</span>
-                    <!-- <img src="fotos/oktober.jpg" alt="Oktober"> -->
-                </div>
-                <div class="caption">
-                    <h3>Oktober 🎃</h3>
-                    <p>Nieuwe belevenissen samen.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section timeline-item right" data-month="September">
-            <div class="polaroid">
-                <div class="image-placeholder">
-                    <span>09</span>
-                    <!-- <img src="fotos/september.jpg" alt="September"> -->
-                </div>
-                <div class="caption">
-                    <h3>September 🍂</h3>
-                    <p>Nog steeds even gelukkig samen.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section timeline-item left" data-month="Augustus">
-            <div class="polaroid">
-                <div class="image-placeholder">
-                    <span>08</span>
-                    <!-- <img src="fotos/augustus.jpg" alt="Augustus"> -->
-                </div>
-                <div class="caption">
-                    <h3>Augustus 🍹</h3>
-                    <p>Onvergetelijke herinneringen.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section timeline-item right" data-month="Juli">
-            <div class="polaroid">
-                <div class="image-placeholder">
-                    <span>07</span>
-                    <!-- <img src="fotos/juli.jpg" alt="Juli"> -->
-                </div>
-                <div class="caption">
-                    <h3>Juli 🌴</h3>
-                    <p>De zomer bracht nog meer avontuur.</p>
-                </div>
-            </div>
-        </section>
 
         <section class="section timeline-item left" data-month="Juni">
             <div class="polaroid">
@@ -141,7 +107,7 @@
                 </div>
                 <div class="caption">
                     <h3>Juni 🌊</h3>
-                    <p>Samen genieten van elk moment.</p>
+                    <p>Toertjes doen? snuiter is mee whi</p>
                 </div>
             </div>
         </section>
@@ -153,7 +119,7 @@
                 </div>
                 <div class="caption">
                     <h3>Mei ☀️</h3>
-                    <p>Zonnige dagen en veel plezier.</p>
+                    <p>Opstap met onze 2 persoonlijke retrievers. wat een schatjes</p>
                 </div>
             </div>
         </section>
@@ -165,7 +131,7 @@
                 </div>
                 <div class="caption">
                     <h3>April 🌸</h3>
-                    <p>Steeds meer mooie momenten.</p>
+                    <p>Na een uur wachten op ons eten en vijf minuten vechten tegen jouw golden retriever aandachtsspanne was dit het resultaat</p>
                 </div>
             </div>
             <div class="polaroid">
@@ -174,7 +140,7 @@
                 </div>
                 <div class="caption">
                     <h3>April 🌸</h3>
-                    <p>Nog een mooie herinnering.</p>
+                    <p>Beseft dat quads toch niet helemaal ons ding zijn. dus hebben we maar een boot geprobeerd</p>
                 </div>
             </div>
         </section>
@@ -186,7 +152,7 @@
                 </div>
                 <div class="caption">
                     <h3>Maart 🌷</h3>
-                    <p>Nieuwe herinneringen.</p>
+                    <p>Zie hier. Toren van pisa , Spanje </p>
                 </div>
             </div>
             <div class="polaroid">
@@ -195,7 +161,16 @@
                 </div>
                 <div class="caption">
                     <h3>Maart 🌷</h3>
-                    <p>Samen op pad.</p>
+                    <p>1 Iemand van ons had een plan en et was ik niet</p>
+                </div>
+            </div>
+            <div class="polaroid">
+                <div class="image-placeholder">
+                    <img src="fotos/maart3.jpg" alt="Maart 3">
+                </div>
+                <div class="caption">
+                    <h3>Maart 🌷</h3>
+                    <p>Talloze koffie dates</p>
                 </div>
             </div>
         </section>
@@ -207,7 +182,7 @@
                 </div>
                 <div class="caption">
                     <h3>Februari 💕</h3>
-                    <p>Een maand vol liefde.</p>
+                    <p>MCDONALDSSSS</p>
                 </div>
             </div>
             <div class="polaroid">
@@ -216,7 +191,7 @@
                 </div>
                 <div class="caption">
                     <h3>Februari 💕</h3>
-                    <p>Onze tweede maand.</p>
+                    <p>Raad zelf maar wie er hoogtevrees had en wie niet </p>
                 </div>
             </div>
         </section>
@@ -228,7 +203,7 @@
                 </div>
                 <div class="caption">
                     <h3>Januari ❄️</h3>
-                    <p>Ons eerste nieuwe jaar samen.</p>
+                    <p>Werken aan hoe fotogeniek ik ben</p>
                 </div>
             </div>
         </section>
@@ -241,7 +216,7 @@
                 </div>
                 <div class="caption">
                     <h3>December 🎄</h3>
-                    <p>Hier begon ons mooie verhaal ❤️</p>
+                    <p>The beginning ❤️</p>
                 </div>
             </div>
         </section>

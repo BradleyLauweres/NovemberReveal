@@ -126,34 +126,68 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confettiActive) return;
         confettiActive = true;
         resizeCanvas();
-        for (let i = 0; i < 150; i++) {
+        // Verminderd van 150 naar 60 voor een subtieler effect
+        for (let i = 0; i < 60; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height - canvas.height,
-                size: Math.random() * 8 + 4,
+                size: Math.random() * 6 + 3, // Iets kleinere snippers
                 color: colors[Math.floor(Math.random() * colors.length)],
-                speed: Math.random() * 3 + 3,
+                speed: Math.random() * 2 + 1, // Trager vallen
                 angle: Math.random() * 6.28,
-                rotation: Math.random() * 0.2 - 0.1
+                rotation: Math.random() * 0.1 - 0.05,
+                opacity: 1
             });
         }
         requestAnimationFrame(updateConfetti);
+        
+        // Stop confetti na 6 seconden voor een rustiger verloop
+        setTimeout(() => {
+            confettiActive = false;
+            // Clear canvas slowly
+            let fadeOut = setInterval(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (!confettiActive) clearInterval(fadeOut);
+            }, 100);
+        }, 6000);
     }
 
     function updateConfetti() {
+        if (!confettiActive && particles.length === 0) return;
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
+        
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
             p.y += p.speed;
-            p.x += Math.sin(p.angle) * 2;
+            p.x += Math.sin(p.angle) * 1;
             p.angle += p.rotation;
+            
+            ctx.globalAlpha = p.opacity;
             ctx.fillStyle = p.color;
             ctx.fillRect(p.x, p.y, p.size, p.size);
-            if (p.y > canvas.height) {
-                p.y = -20;
-                p.x = Math.random() * canvas.width;
+            ctx.globalAlpha = 1;
+
+            // Als confettiActive vals is, laat de snippers rustig uit beeld vallen of faden
+            if (!confettiActive) {
+                p.opacity -= 0.005;
             }
-        });
-        if (confettiActive) requestAnimationFrame(updateConfetti);
+
+            if (p.y > canvas.height || p.opacity <= 0) {
+                if (confettiActive && p.opacity > 0) {
+                    p.y = -20;
+                    p.x = Math.random() * canvas.width;
+                } else {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+        
+        if (particles.length > 0) {
+            requestAnimationFrame(updateConfetti);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
     }
 
     function resizeCanvas() {

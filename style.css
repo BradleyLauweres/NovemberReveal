@@ -205,7 +205,7 @@ body {
 .ticket-container {
     background: white;
     width: 100%;
-    max-width: 650px;
+    max-width: 650px; /* Langwerpig */
     margin: 30px auto;
     border-radius: 4px;
     box-shadow: 0 15px 45px rgba(0,0,0,0.2);
@@ -333,13 +333,17 @@ body {
 }
 
 .airport-codes span {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 900;
     font-family: 'Courier New', Courier, monospace;
 }
 
+.airport-codes svg {
+    transform: rotate(90deg);
+}
+
 .destination-title {
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     font-weight: 900;
     color: var(--primary-color);
     margin: 0;
@@ -409,7 +413,7 @@ body {
 }
 
 .reveal-footer {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-style: italic;
     color: var(--text-color);
     margin-top: 20px;
@@ -464,8 +468,8 @@ body {
 
 @media (max-width: 400px) {
     .ticket-row { gap: 20px; }
-    .destination-title { font-size: 2.2rem; }
-    .airport-codes span { font-size: 1.4rem; }
+    .destination-title { font-size: 1.8rem; }
+    .airport-codes span { font-size: 1.1rem; }
     .polaroid { width: 220px; }
     .timeline-item.split { padding: 10px; }
     .timeline-item.split .polaroid:nth-child(n) { 

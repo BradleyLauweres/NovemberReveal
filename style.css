@@ -83,7 +83,7 @@ body {
 
 .timeline-item.split .polaroid:nth-child(2) {
     align-self: flex-end;
-    margin-top: -120px; /* Verticale overlap om ruimte te besparen op mobiel */
+    margin-top: -120px; /* Verticale overlap om ruimte te besparen */
     z-index: 3;
 }
 
@@ -205,7 +205,7 @@ body {
 .ticket-container {
     background: white;
     width: 100%;
-    max-width: 650px; /* Langwerpig */
+    max-width: 650px;
     margin: 30px auto;
     border-radius: 4px;
     box-shadow: 0 15px 45px rgba(0,0,0,0.2);
@@ -467,9 +467,8 @@ body {
     .destination-title { font-size: 2.2rem; }
     .airport-codes span { font-size: 1.4rem; }
     .polaroid { width: 220px; }
-    .timeline-item.split { padding: 20px 10px; }
-    .timeline-item.split .polaroid:nth-child(2),
-    .timeline-item.split .polaroid:nth-child(3) { 
-        margin-top: -40px; /* Sterk verminderde overlap zodat tekst leesbaar blijft */
+    .timeline-item.split { padding: 10px; }
+    .timeline-item.split .polaroid:nth-child(n) { 
+        margin-top: 15px; /* Geen negatieve overlap meer, maar een kleine tussenruimte */
     }
 }
